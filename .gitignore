@@ -1,0 +1,29 @@
+# editor
+build/
+.settings/
+.mxproject
+.vscode/
+*.launch
+.clangd
+
+# kicad
+*-backups/
+*.bck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*.sch-bak
+*_autosave.kicad_pcb
+*_autosave.kicad_sch
+*_autosave-*
+*.kicad_prl
+
+# chache
+fp-info-cache
+*.tmp
+*.lck
+
+# other files
+*.gbr
+*.drl
+*.pos
+*.csv
