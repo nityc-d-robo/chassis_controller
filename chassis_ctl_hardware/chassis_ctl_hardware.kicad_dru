@@ -1,0 +1,134 @@
+(version 1)
+
+# =====================================================================
+# ICM-40609-D 用デザインルール (データシート基準版)
+#
+# 出典タグ:
+#   [DS]  ICM-40609-D データシート DS-000330 Rev1.2
+#   [A93] AN-000393 Rev1.8 (2024) IMU PCB Design and MEMS Assembly Guidelines
+#   [A02] AN-IVS-0002A-00 Rev2.1 (2014) InvenSense MEMS Handling
+#         (データシート17節が参照する文書。A93に置き換えられている)
+# 食い違う場合は新しい [A93] を優先する。
+#
+# 単位はmm。 1mil = 0.0254mm
+#   6mil=0.1524mm / 8mil=0.2032mm / 10mil=0.254mm / 12mil=0.3048mm
+#
+# 数値の根拠がある項目 -> エラー
+# 設計者が決めた/算出した項目 -> severity warning
+# =====================================================================
+
+# ---------------------------------------------------------------------
+# [DS 9.2] ピッチ0.4mm(e)、パッド幅W=0.15~0.25mm(最大0.25)
+#   -> 隣り合うパッドの隙間は最小 0.4 - 0.25 = 0.15mm になる。
+# ネットクラスのクリアランスが0.15mmより大きいと、IMU自身のパッド間で
+# DRCエラーになるため、U1のコートヤード内だけ0.15mmに緩和する。
+# ※ 基板メーカーの最小クリアランス(多くは0.1mm前後)以上であることを確認。
+# ---------------------------------------------------------------------
+(rule "IMU: pad gap from 0.4mm pitch (DS 9.2)"
+	(constraint clearance (min 0.15mm))
+	(condition "A.insideCourtyard('U1')"))
+
+# ---------------------------------------------------------------------
+# [DS Table 9] NCピン(1-7, 10, 14-17, 21)は "Do not connect"。
+# [A93 2.4]    NCパッドははんだ付けするが、電気的には接続しない。
+# -> NCパッドのネットに配線を引かない。
+# ※ KiCadの未接続ネット名(unconnected-(U1-NC-PadN))を完全一致で指定。
+# ---------------------------------------------------------------------
+(rule "IMU: NC pads must stay unconnected (DS Table 9)"
+	(constraint disallow track via zone)
+	(condition "A.NetName == 'unconnected-(U1-NC-Pad1)' || A.NetName == 'unconnected-(U1-NC-Pad2)' || A.NetName == 'unconnected-(U1-NC-Pad3)' || A.NetName == 'unconnected-(U1-NC-Pad4)' || A.NetName == 'unconnected-(U1-NC-Pad5)' || A.NetName == 'unconnected-(U1-NC-Pad6)' || A.NetName == 'unconnected-(U1-NC-Pad7)' || A.NetName == 'unconnected-(U1-NC-Pad10)' || A.NetName == 'unconnected-(U1-NC-Pad14)' || A.NetName == 'unconnected-(U1-NC-Pad15)' || A.NetName == 'unconnected-(U1-NC-Pad16)' || A.NetName == 'unconnected-(U1-NC-Pad17)' || A.NetName == 'unconnected-(U1-NC-Pad21)'"))
+
+# ---------------------------------------------------------------------
+# [DS Table 6/7] SDOの出力タイミング(tVD.SDO 最大21.5ns)は Cload=20pF で規定。
+# 負荷容量が20pFを超えるとタイミングが保証されない。
+# MCUの入力容量と配線容量の合計を20pF以下にするため、MISOを短く保つ。
+# ※ 100mmは概算(配線約1pF/cm + MCU入力数pF)。設計者の仮置きなので警告。
+# ---------------------------------------------------------------------
+(rule "IMU: keep SDO (MISO) short for Cload=20pF (assumed 100mm)"
+	(severity warning)
+	(constraint length (max 100mm))
+	(condition "A.NetName == '/IMU/SPI_MISO'"))
+
+# ---------------------------------------------------------------------
+# [A93 2.1 / 2.4] VDD, VDDIOのファンアウト配線とシリアル配線は6mil以上。
+# ※ +3.3V は VDD/VDDIO 共通ネットなので、全+3.3V配線に適用される。
+# ※ nCSのネット名(IMU_CS等)を決めたら条件に追加すること。
+# ---------------------------------------------------------------------
+(rule "IMU: power and signal track >= 6mil"
+	(constraint track_width (min 0.1524mm))
+	(condition "A.NetName == '+3.3V' || A.NetName == '/IMU/SPI_CLK' || A.NetName == '/IMU/SPI_MISO' || A.NetName == '/IMU/SPI_MOSI' || A.NetName == '/IMU/INT1'"))
+
+# ---------------------------------------------------------------------
+# [A93 2.4] GNDのリターンパスは10mil以上。
+# [DS Table 9] GNDは18番ピン。(A93は汎用文書で「pin6」と書いている)
+# ---------------------------------------------------------------------
+(rule "IMU: GND return track >= 10mil"
+	(constraint track_width (min 0.254mm))
+	(condition "A.NetName == 'GND'"))
+
+# ---------------------------------------------------------------------
+# 【変更】U1のコートヤード内だけ、配線幅の下限を0.127mm(5mil)に緩和する。
+# 理由: パッド幅は0.15~0.25mm(DS 9.2)で、6mil(0.1524mm)の配線を
+#       0.4mmピッチのパッドから引き出すと、隣の配線との隙間が足りなくなる。
+#       GNDの10mil(0.254mm)も、パッド幅0.2mmより太く、同じ理由で引き出せない。
+# ※ AN-000393の「6mil以上」「10mil以上」から外れる、設計者の判断による例外。
+# ※ 細くするのはコートヤード内だけにし、外に出たら直ちに6mil以上
+#    (GNDは10mil以上)へ広げる。
+# ※ ルールは後ろに書いたものが優先される。このルールは上の幅規定
+#    (6mil, 10mil)より後ろに置くこと。
+# ※ 0.127mmが基板メーカーの最小線幅以上であることを確認すること。
+# ---------------------------------------------------------------------
+(rule "IMU: relaxed track width inside U1 courtyard (5mil)"
+	(constraint track_width (min 0.127mm))
+	(condition "A.insideCourtyard('U1')"))
+
+# ---------------------------------------------------------------------
+# [A93 2.1] GNDビアは ドリル8mil超 / 銅径12mil超。
+# ※ 「超」なので、実際は 0.3mm/0.6mm 程度の標準ビアを推奨。
+# ---------------------------------------------------------------------
+(rule "IMU: GND/power via drill >= 8mil"
+	(constraint hole_size (min 0.2032mm))
+	(condition "A.Type == 'Via' && (A.NetName == 'GND' || A.NetName == '+3.3V')"))
+
+(rule "IMU: GND/power via diameter >= 12mil"
+	(constraint via_diameter (min 0.3048mm))
+	(condition "A.Type == 'Via' && (A.NetName == 'GND' || A.NetName == '+3.3V')"))
+
+# ---------------------------------------------------------------------
+# [A93 2.4 / Figure 8] IMUの直下(全層)にビアを置かない。パッド内ビアも禁止。
+# [A02 Trace Routing]  パッケージの下にビア・配線を通すことは推奨されない。
+# ※ U1のコートヤード内が対象。LGAフットプリントにコートヤードが無いと効かない。
+# ※ 配線と銅ゾーンは基板上にルールエリア(キープアウト)を描いて禁止する。
+# ---------------------------------------------------------------------
+(rule "IMU: no via under package"
+	(constraint disallow via)
+	(condition "A.insideCourtyard('U1')"))
+
+# ---------------------------------------------------------------------
+# [A02 Component Placement]
+#   コネクタ・押しボタン・シールドボックスをセンサから2mm未満に置かない。
+# 対象: J1 J2 J3 J4 J5 J6 J11(コネクタ), SW1(押しボタン)
+# ---------------------------------------------------------------------
+(rule "IMU: connectors and push button >= 2mm"
+	(constraint courtyard_clearance (min 2mm))
+	(condition "A.Reference == 'U1' && (B.Reference == 'J1' || B.Reference == 'J2' || B.Reference == 'J3' || B.Reference == 'J4' || B.Reference == 'J5' || B.Reference == 'J6' || B.Reference == 'J11' || B.Reference == 'SW1')"))
+
+# ---------------------------------------------------------------------
+# [A93 3.1 / 3.6 / 3.7] 発熱源・大型コネクタ・振動源から離す。(数値の記載なし)
+# 5mmは設計者の仮置き(警告)。基板サイズに合わせて調整する。
+# 対象: U2(LDO) U4(MCU) IC1(CANトランシーバ) J3(USB-C) J11(RJ45)
+# ---------------------------------------------------------------------
+(rule "IMU: keep away from heat sources and large connectors (assumed 5mm)"
+	(severity warning)
+	(constraint courtyard_clearance (min 5mm))
+	(condition "A.Reference == 'U1' && (B.Reference == 'U2' || B.Reference == 'U4' || B.Reference == 'IC1' || B.Reference == 'J3' || B.Reference == 'J11')"))
+
+# ---------------------------------------------------------------------
+# [A93 2.4] クロックとデータは同じ長さで配線する。(任意)
+# 12MHz程度なら影響が小さいので無効化している。使う場合はコメントを外す。
+# 構文はKiCadのバージョンで差があるため、使う前にDRCが通ることを確認する。
+# ---------------------------------------------------------------------
+# (rule "IMU: SPI length skew"
+#	(severity warning)
+#	(constraint skew (max 2mm))
+#	(condition "A.NetName == '/IMU/SPI_CLK' || A.NetName == '/IMU/SPI_MISO' || A.NetName == '/IMU/SPI_MOSI'"))

@@ -1177,7 +1177,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "33ab61cc-320a-4a3b-bc14-dd709dd29d01")
-		(property "Reference" "C10"
+		(property "Reference" "C18"
 			(at 113.792 76.454 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1251,7 +1251,7 @@
 			)
 			(project "chassis_ctl_hardware"
 				(path "/94505b12-11a5-48fa-b7fe-671b65f15652/d4fe4721-ecc1-4cb8-906b-7bb9251c3497"
-					(reference "C10")
+					(reference "C18")
 					(unit 1)
 				)
 			)
@@ -1281,7 +1281,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "36e8e2d8-51d2-4729-a0c9-b699fa92a555")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR049"
 			(at 165.1 91.44 0)
 			(hide yes)
 			(show_name no)
@@ -1351,7 +1351,7 @@
 			)
 			(project "chassis_ctl_hardware"
 				(path "/94505b12-11a5-48fa-b7fe-671b65f15652/d4fe4721-ecc1-4cb8-906b-7bb9251c3497"
-					(reference "#PWR024")
+					(reference "#PWR049")
 					(unit 1)
 				)
 			)
@@ -1380,7 +1380,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "43d05997-9073-4d42-bc2e-c97f72941320")
-		(property "Reference" "#PWR021"
+		(property "Reference" "#PWR047"
 			(at 116.84 54.61 0)
 			(hide yes)
 			(show_name no)
@@ -1451,7 +1451,7 @@
 			)
 			(project "chassis_ctl_hardware"
 				(path "/94505b12-11a5-48fa-b7fe-671b65f15652/d4fe4721-ecc1-4cb8-906b-7bb9251c3497"
-					(reference "#PWR021")
+					(reference "#PWR047")
 					(unit 1)
 				)
 			)
@@ -1480,7 +1480,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "53efd6f1-72c1-4197-801b-1cb8a2f5d660")
-		(property "Reference" "#PWR0142"
+		(property "Reference" "#PWR048"
 			(at 152.4 60.96 0)
 			(hide yes)
 			(show_name no)
@@ -1540,7 +1540,7 @@
 		(instances
 			(project "chassis_ctl_hardware"
 				(path "/94505b12-11a5-48fa-b7fe-671b65f15652/d4fe4721-ecc1-4cb8-906b-7bb9251c3497"
-					(reference "#PWR0142")
+					(reference "#PWR048")
 					(unit 1)
 				)
 			)
@@ -1569,7 +1569,7 @@
 		(in_pos_files yes)
 		(dnp no)
 		(uuid "7451a01c-ef54-4ddd-9689-52873f92d992")
-		(property "Reference" "C11"
+		(property "Reference" "C19"
 			(at 148.082 76.454 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1643,7 +1643,7 @@
 			)
 			(project "chassis_ctl_hardware"
 				(path "/94505b12-11a5-48fa-b7fe-671b65f15652/d4fe4721-ecc1-4cb8-906b-7bb9251c3497"
-					(reference "C11")
+					(reference "C19")
 					(unit 1)
 				)
 			)
