@@ -2540,12 +2540,12 @@
 		(uuid "09f1c117-c99d-40ac-8ab7-a46e745143f0")
 	)
 	(no_connect
-		(at 146.05 110.49)
-		(uuid "13e74b2c-cb35-4e5b-856a-3bdfdfc2375b")
+		(at 44.45 102.87)
+		(uuid "1222afd5-5d47-4f80-8206-5eb7ff77d53b")
 	)
 	(no_connect
-		(at 44.45 87.63)
-		(uuid "1d6b6c3c-bf14-4cd0-b77b-229cc4ec625a")
+		(at 146.05 110.49)
+		(uuid "13e74b2c-cb35-4e5b-856a-3bdfdfc2375b")
 	)
 	(no_connect
 		(at 105.41 44.45)
@@ -2556,12 +2556,24 @@
 		(uuid "45c132f5-0bd8-48aa-bf17-63196db6cfd6")
 	)
 	(no_connect
-		(at 44.45 113.03)
-		(uuid "49cc5c5c-1bbf-4f8f-a433-39f755a80da0")
+		(at 105.41 41.91)
+		(uuid "6193a941-8b53-4e6d-ad6e-69280e6ffbe6")
 	)
 	(no_connect
 		(at 44.45 80.01)
 		(uuid "72b00041-09b0-4778-8a80-71aef149f10f")
+	)
+	(no_connect
+		(at 44.45 54.61)
+		(uuid "73e26240-ce49-4c7c-a14f-69972dc853cc")
+	)
+	(no_connect
+		(at 44.45 49.53)
+		(uuid "7bd5e84a-d489-4a1c-ad62-ca367d26706f")
+	)
+	(no_connect
+		(at 44.45 100.33)
+		(uuid "99a75fed-2784-42c1-9da2-37fd09e89ef0")
 	)
 	(no_connect
 		(at 158.75 105.41)
@@ -2578,6 +2590,10 @@
 	(no_connect
 		(at 44.45 67.31)
 		(uuid "c7709f5d-d268-4b72-abe9-4b71626d1ec2")
+	)
+	(no_connect
+		(at 44.45 52.07)
+		(uuid "d961f2bf-c135-4945-806b-1a7a16da64bb")
 	)
 	(no_connect
 		(at 146.05 105.41)
@@ -2719,7 +2735,7 @@
 	)
 	(wire
 		(pts
-			(xy 119.38 52.07) (xy 105.41 52.07)
+			(xy 118.11 52.07) (xy 105.41 52.07)
 		)
 		(stroke
 			(width 0)
@@ -3059,7 +3075,7 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 92.71) (xy 22.86 92.71)
+			(xy 44.45 92.71) (xy 21.59 92.71)
 		)
 		(stroke
 			(width 0)
@@ -3528,7 +3544,7 @@
 		(uuid "76ef3b42-9685-401b-8881-c634bcf9350f")
 	)
 	(label "RCC_OSC_IN"
-		(at 119.38 52.07 180)
+		(at 118.11 52.07 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3578,7 +3594,7 @@
 		(uuid "8d30c6a0-38be-40d5-a212-9fb89ae3c469")
 	)
 	(label "JTDO_SWO"
-		(at 22.86 92.71 0)
+		(at 21.59 92.71 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3737,17 +3753,6 @@
 		)
 		(uuid "fd6ec531-0229-4402-b9d5-df125e708a99")
 	)
-	(hierarchical_label "FDCAN_State"
-		(shape output)
-		(at 44.45 52.07 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "0cd5e47d-a602-4238-aa54-9f80f7a18fae")
-	)
 	(hierarchical_label "SPI2_MOSI"
 		(shape input)
 		(at 44.45 120.65 180)
@@ -3759,16 +3764,16 @@
 		)
 		(uuid "0e5fa5e4-0e75-4174-8699-adc38a365547")
 	)
-	(hierarchical_label "TIM1_CH1"
+	(hierarchical_label "SPI2_NSS"
 		(shape input)
-		(at 44.45 62.23 180)
+		(at 44.45 113.03 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "2c4ac221-7880-473f-816c-54018ac5939b")
+		(uuid "17009f37-43bc-4340-bf24-a8c9c4bf1b1e")
 	)
 	(hierarchical_label "SPI2_SCK"
 		(shape input)
@@ -3781,7 +3786,7 @@
 		)
 		(uuid "31023178-57fe-4120-a248-57b19c8645d4")
 	)
-	(hierarchical_label "TIM1_ETR"
+	(hierarchical_label "TIM2_CH3"
 		(shape input)
 		(at 44.45 46.99 180)
 		(effects
@@ -3794,47 +3799,25 @@
 	)
 	(hierarchical_label "MCU_State_LED"
 		(shape output)
-		(at 44.45 49.53 180)
+		(at 44.45 87.63 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "54f211b2-35f7-4570-9697-7ce1277129d6")
+		(uuid "3e74892a-9718-4acf-b5e4-f87eaa85f3d6")
 	)
-	(hierarchical_label "SPI1_MOSI"
+	(hierarchical_label "FDCAN_State"
 		(shape output)
-		(at 44.45 59.69 180)
+		(at 44.45 90.17 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "5d611b69-8aac-4f84-b763-50285a63ff38")
-	)
-	(hierarchical_label "TIM1_CH2"
-		(shape input)
-		(at 44.45 64.77 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "6c7af45b-6b68-4818-8b97-4b471cec8b22")
-	)
-	(hierarchical_label "SPI1_MISO"
-		(shape input)
-		(at 44.45 57.15 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "739c66ac-3008-4606-842a-45e1e67f0f66")
+		(uuid "68181c76-0527-42e7-9a9c-9fe98e5648f7")
 	)
 	(hierarchical_label "USB_DP"
 		(shape input)
@@ -3847,16 +3830,16 @@
 		)
 		(uuid "739f91b7-f9b6-4c5f-8399-a54d31ac9ebc")
 	)
-	(hierarchical_label "I2C1_SCL"
+	(hierarchical_label "TIM3_CH3"
 		(shape input)
-		(at 44.45 100.33 180)
+		(at 44.45 85.09 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "811d3b82-0ae3-479e-9236-5b3ebc38b5a0")
+		(uuid "8069c91d-2672-4126-baf9-e1dd1e607dc6")
 	)
 	(hierarchical_label "FDCAN1_RX"
 		(shape input)
@@ -3880,16 +3863,16 @@
 		)
 		(uuid "8e5edfed-2f3f-4515-b37e-340a8afe3b11")
 	)
-	(hierarchical_label "TIM2_ETR"
-		(shape input)
-		(at 105.41 41.91 0)
+	(hierarchical_label "INT1"
+		(shape output)
+		(at 44.45 64.77 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
-		(uuid "af8fb399-4eb2-457b-b849-57706b3706ae")
+		(uuid "a075235d-2444-4cfc-96a4-a79d677f0b75")
 	)
 	(hierarchical_label "TIM2_CH2"
 		(shape input)
@@ -3902,17 +3885,6 @@
 		)
 		(uuid "b2eefb67-0f79-40f2-91f1-b10387dbeedd")
 	)
-	(hierarchical_label "INT2{slash}FSYNC"
-		(shape output)
-		(at 44.45 85.09 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "ba8997b1-6413-4bbe-bb4b-76192704d9d9")
-	)
 	(hierarchical_label "TIM2_CH1"
 		(shape input)
 		(at 44.45 41.91 180)
@@ -3924,16 +3896,38 @@
 		)
 		(uuid "bd8f3fbc-71b3-4a87-8d2d-7eccf4169937")
 	)
-	(hierarchical_label "SPI1_SCK"
-		(shape output)
-		(at 44.45 54.61 180)
+	(hierarchical_label "TIM3_CH1"
+		(shape input)
+		(at 44.45 57.15 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "e814ab39-40a1-4563-ae06-067dfc01a3e9")
+		(uuid "d653bddc-61ac-4064-8330-5cbca2b5676c")
+	)
+	(hierarchical_label "INT2{slash}FSYNC"
+		(shape output)
+		(at 44.45 62.23 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "dabd4b58-68b6-47fc-9f7a-d9bf925fa916")
+	)
+	(hierarchical_label "TIM3_CH2"
+		(shape input)
+		(at 44.45 59.69 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ebb8a7e5-1730-4324-ade7-29eca6b4ca1d")
 	)
 	(hierarchical_label "USB_DM"
 		(shape input)
@@ -3945,28 +3939,6 @@
 			(justify right)
 		)
 		(uuid "f0cbc672-f4a4-422c-85ce-6da8171c6b7a")
-	)
-	(hierarchical_label "I2C1_SDA"
-		(shape input)
-		(at 44.45 102.87 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "f17ef75e-980c-4be3-8ce1-d51e97161668")
-	)
-	(hierarchical_label "INT1"
-		(shape output)
-		(at 44.45 90.17 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "f7507dbe-7b8b-4d29-98bc-dc73712097e9")
 	)
 	(hierarchical_label "SPI2_MISO"
 		(shape input)
